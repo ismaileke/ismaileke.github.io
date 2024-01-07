@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamera Uygulaması</title>
+    <style>
+        video {
+            width: 100%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kamera Uygulaması</h1>
+    
+    <video id="cam" autoplay></video>
+    
+    <script>
+        // Tarayıcıda WebRTC desteği kontrolü
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Kullanıcıdan kamera izni al
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // Video etiketine akışı bağla
+                    var videoElement = document.getElementById('cam');
+                    videoElement.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.error('Hata:', error);
+                });
+        } else {
+            console.error('Tarayıcınız WebRTC desteklemiyor.');
+        }
+    </script>
+</body>
+</html>
